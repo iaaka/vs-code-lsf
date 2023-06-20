@@ -8,6 +8,7 @@ This repo contains code and instructions on how to run [vs-code](https://code.vi
 # Future development
 ## Start job on connect
 ## Vs-code launcher
+## Multiple sessions
 
 # Alternatives
 ## code-server 
