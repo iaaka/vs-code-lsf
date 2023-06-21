@@ -28,6 +28,11 @@ ssh farm5comp
 ```
 If everything is allright it should send you to the compute node.
 Now launch Visual Studio, go to Remote SSH extension, chose farm5comp and voila!
+## Cleanup
+It is better to kill job when you stop working with Visual Studio to release resources. You can do it by:
+```
+bkill $(bjobs  -o JOBID -J vs-code-tunnel -noheader)
+```
 
 # Future development
 1. Add option to bsub script to request GPU (right now one needs to edit the script)
