@@ -2,7 +2,7 @@
 This repo contains code and instructions on how to run [Visual Studio Code](https://code.visualstudio.com/) localy with all code executed on remote LSF cluster. It was inspired by discussion [here](https://github.com/microsoft/vscode-remote-release/issues/1722#issuecomment-1216040876).
 
 # How to use
-You'll need Visual Studio Code with installed `Remote` extension and ssh access to the head node of lsf cluster (it'll be referenced as `farm5` below) through vpn or ssh tunnel.
+You'll need Visual Studio Code with installed `Remote` extension and ssh access to the head node of lsf cluster (it'll be referenced as `farm5` below) through vpn or ssh tunnel if necessary.
 The idea is to run `sshd` server as lsf job and connect to it from Visual Studio using Remote SSH through the tunnel.
 ## Remote server (LSF)
 Login to the head node, download bsub script and run it:
