@@ -1,5 +1,5 @@
 Host farm5comp
-        ProxyCommand ssh farm5 "nc \$(/software/lsf-farm5/10.1/linux3.10-glibc2.17-x86_64/bin/bjobs  -o first_host -J vstunnel -noheader) 5678"
+        ProxyCommand ssh farm5 "nc \$(/software/lsf-farm5/10.1/linux3.10-glibc2.17-x86_64/bin/bjobs  -o first_host -J vs-code-tunnel -noheader) 5678"
 	StrictHostKeyChecking no
-        User pm19
+        User <USER>
 

@@ -23,5 +23,5 @@ then
   -M${mem} \
   -R "span[hosts=1] select[mem>${mem}] rusage[mem=${mem}]" \
   /usr/sbin/sshd -E ${logpath}/${name}-sshd.log -f /dev/null -D -p 5678 -h ${HOME}/.ssh/id_rsa
-  bwait -w "started(vstunnel)"
+  bwait -w "started($name)"
 fi
