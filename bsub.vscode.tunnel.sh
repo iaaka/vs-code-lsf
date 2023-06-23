@@ -1,9 +1,9 @@
 #! /bin/bash -e
 
 
-queue=${1:-normal}
-cpu=${2:-4}
 mem=${1:-40000}
+cpu=${2:-4}
+queue=${3:-normal}
 
 name='vs-code-tunnel'
 logpath=${HOME}/.vs-code-tunnel
