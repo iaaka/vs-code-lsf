@@ -38,7 +38,7 @@ bkill $(bjobs  -o JOBID -J vs-code-tunnel -noheader)
 1. Add option to bsub script to request GPU (right now one needs to edit the script)
 2. Make lsf job start on Visual Studio connect (I have tried `RemoteCommand` in ssh config, but so far unsuccesfully)
 3. Other option can be to make local Visual Studio launcher that first starts the job and then launches Visual Studio. Probably [this](https://scicomp.ethz.ch/wiki/VSCode) is relevant.
-4. Add suppots for multiple sessions (with different resources) simultaneously. Job names needs to be diversified. 
+4. Add suppots for multiple sessions (with different resources) simultaneously. Possible interference of multiple sshd running on the same node? Job names needs to be diversified.  
 
 # Alternatives
 1. [code-server](https://github.com/coder/code-server) is server version of vs-code (opensource branch) that can be accessed through the browser. See [docker](https://hub.docker.com/r/linuxserver/code-server). In can be run on farm by running following code in interactive session:
