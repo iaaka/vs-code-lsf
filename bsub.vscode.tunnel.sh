@@ -4,6 +4,13 @@
 mem=${1:-40000}
 cpu=${2:-4}
 queue=${3:-normal}
+gmem=${4:-6000}
+
+gpu=''
+if [[ $queue == *"gpu"* ]]
+then
+	gpu="-gpu \"mode=shared:j_exclusive=no:gmem=${gmem}:num=1\""
+fi
 
 name='vs-code-tunnel'
 logpath=${HOME}/.vs-code-tunnel
@@ -22,6 +29,9 @@ then
   -n $cpu \
   -M${mem} \
   -R "span[hosts=1] select[mem>${mem}] rusage[mem=${mem}]" \
+  $gpu \
   /usr/sbin/sshd -E ${logpath}/${name}-sshd.log -f /dev/null -D -p 5678 -h ${HOME}/.ssh/id_rsa
   bwait -w "started($name)"
 fi
+
+

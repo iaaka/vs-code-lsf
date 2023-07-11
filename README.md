@@ -11,7 +11,7 @@ wget https://raw.githubusercontent.com/iaaka/vs-code-lsf/main/bsub.vscode.tunnel
 ./bsub.vscode.tunnel.sh
 ```
 The script should start the job nammed `vs-code-tunnel`. The script will not start the job if one is already running and it will wait untill job is started.
-Memory, number of cores and queue can be specified as command line arguments (defaults are `40000`, `4`, and `normal`).
+Memory, number of cores, queue and gpu memory can be specified as command line arguments (defaults are `40000`, `4`, `normal`, and 6000). GPU resources only requested if queue name contains `gpu`.
 
 ## Local machine
 First edit your `~/.ssh/config` by adding following lines:
@@ -35,10 +35,9 @@ bkill $(bjobs  -o JOBID -J vs-code-tunnel -noheader)
 ```
 
 # Future development
-1. Add option to bsub script to request GPU (right now one needs to edit the script)
-2. Make lsf job start on Visual Studio connect (I have tried `RemoteCommand` in ssh config, but so far unsuccesfully)
-3. Other option can be to make local Visual Studio launcher that first starts the job and then launches Visual Studio. Probably [this](https://scicomp.ethz.ch/wiki/VSCode) is relevant.
-4. Add suppots for multiple sessions (with different resources) simultaneously. Job names needs to be diversified. 
+1. Make lsf job start on Visual Studio connect (I have tried `RemoteCommand` in ssh config, but so far unsuccesfully)
+2. Other option can be to make local Visual Studio launcher that first starts the job and then launches Visual Studio. Probably [this](https://scicomp.ethz.ch/wiki/VSCode) is relevant.
+3. Add suppots for multiple sessions (with different resources) simultaneously. Job names needs to be diversified. 
 
 # Alternatives
 1. [code-server](https://github.com/coder/code-server) is server version of vs-code (opensource branch) that can be accessed through the browser. See [docker](https://hub.docker.com/r/linuxserver/code-server). In can be run on farm by running following code in interactive session:
