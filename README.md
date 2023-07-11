@@ -11,7 +11,7 @@ wget https://raw.githubusercontent.com/iaaka/vs-code-lsf/main/bsub.vscode.tunnel
 ./bsub.vscode.tunnel.sh
 ```
 The script should start the job nammed `vs-code-tunnel`. The script will not start the job if one is already running and it will wait untill job is started.
-Memory, number of cores, queue and gpu memory can be specified as command line arguments (defaults are `40000`, `4`, `normal`, and 6000). GPU resources only requested if queue name contains `gpu`.
+Memory, number of cores, queue and gpu memory can be specified as command line arguments (defaults are `40000`, `4`, `normal`, and `6000`). GPU resources only requested if queue name contains `gpu`.
 
 ## Local machine
 First edit your `~/.ssh/config` by adding following lines:
