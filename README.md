@@ -1,22 +1,23 @@
 # vs-code-lsf
 This repo contains code and instructions on how to run [Visual Studio Code](https://code.visualstudio.com/) localy with all code executed on remote LSF cluster. It was inspired by discussion [here](https://github.com/microsoft/vscode-remote-release/issues/1722#issuecomment-1216040876).
 
-# How to use
+# Instructions
+## Preparations
+This part is about what you need to do just once. Section `Usage` below shows how to start vs-code and connect to the jobs once everytinh is set up.
+
 You'll need Visual Studio Code with installed `Remote - SSH` extension and ssh access to the head node of lsf cluster (it'll be referenced as `farm22` below) through vpn or ssh tunnel if necessary.
-The idea is to run `sshd` server as lsf job and connect to it from Visual Studio using Remote SSH through the tunnel.
-## Remote server (LSF)
+The idea is to run `sshd` server as lsf job and connect to it from Visual Studio using `Remote - SSH`.
+
+### Remote server (LSF)
 Login to the head node, download bsub script and run it:
 ```
 wget --no-cache https://raw.githubusercontent.com/iaaka/vs-code-lsf/main/bsub.vscode.tunnel.sh
-chmod +x bsub.vscode.tunnel.sh 
+chmod +x bsub.vscode.tunnel.sh
 ./bsub.vscode.tunnel.sh
 ```
 The script should start the job nammed `vs-code-tunnel`. The script will not start the job if one is already running and it will wait untill job is started.
-Memory, queue, number of cores can be specified as command line arguments. Defaults (`4` (*1000M), `normal`, and `1`) can be changed by `./bsub.vscode.tunnel.sh 10 yesterday 2`. This command will requests 10000M with 2 cores in `yesterday` queue.
 
-### GPU 
-The script requests gmem if queue name contains `gpu`, default is 6 (*1000M), it can be changed by fourth parameter `./bsub.vscode.tunnel.sh 2 gpu-normal 1 3`. This command will requests 2000M RAM, 3000M gmem, and 1 core in `gpu-normal` queue.
-## Local machine
+### Local machine
 First edit your `~/.ssh/config` by adding following lines:
 ```
 Host farm22comp
@@ -25,12 +26,33 @@ Host farm22comp
   User <USER>
 ```
 Replace  `<USER>` with your farm user name. Thanks to `ProxyCommand` this will allow to determine host name by job name (note `vs-code-tunnel` matches job name from bsub script.)
-You can check whether it works by 
+You can check whether it works by: 
 ```
 ssh farm22comp
 ```
 If everything is allright it should send you to the compute node.
-Now launch Visual Studio, go to Remote SSH extension, chose farm22comp and voila!
+
+## Usage
+Login on head node and run (if it was not done before):
+```
+./bsub.vscode.tunnel.sh
+```
+The script should start the job nammed `vs-code-tunnel`. The script will not start the job if one is already running and it will wait untill job is started.
+Memory, queue, number of cores can be specified as command line arguments. Defaults (`4` (*1000M), `normal`, and `1`) can be changed by:
+```
+./bsub.vscode.tunnel.sh 10 yesterday 2
+```
+This command will requests 10000M with 2 cores in `yesterday` queue.
+
+Now launch vs-code on your local machine, go to Remote SSH extension, chose farm22comp and voila!
+
+### GPU 
+You may alsospecify gmem if you are using gpu-queues (ones that contains `gpu` in their mames). The default is 6 (*1000M), it can be changed by fourth parameter:
+```
+./bsub.vscode.tunnel.sh 2 gpu-normal 1 3
+```
+This command will requests 2000M RAM, 3000M gmem, and 1 core in `gpu-normal` queue.
+
 ## Cleanup
 It is better to kill job when you stop working with Visual Studio to release resources. You can do it by:
 ```
