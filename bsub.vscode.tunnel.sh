@@ -4,7 +4,7 @@
 mem=${1:-4}000
 queue=${2:-normal}
 cpu=${3:-1}
-gmem=${4:-6000}
+gmem=${4:-6}000
 name='vs-code-tunnel'
 logpath=${HOME}/.vs-code-tunnel
 
