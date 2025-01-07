@@ -7,12 +7,15 @@ The idea is to run `sshd` server as lsf job and connect to it from Visual Studio
 ## Remote server (LSF)
 Login to the head node, download bsub script and run it:
 ```
-wget https://raw.githubusercontent.com/iaaka/vs-code-lsf/main/bsub.vscode.tunnel.sh
+wget --no-cache https://raw.githubusercontent.com/iaaka/vs-code-lsf/main/bsub.vscode.tunnel.sh
+chmod +x bsub.vscode.tunnel.sh 
 ./bsub.vscode.tunnel.sh
 ```
 The script should start the job nammed `vs-code-tunnel`. The script will not start the job if one is already running and it will wait untill job is started.
-Memory, number of cores, queue and gpu memory can be specified as command line arguments (defaults are `40000`, `4`, `normal`, and `6000`). GPU resources only requested if queue name contains `gpu`.
+Memory, queue, number of cores can be specified as command line arguments. Defaults (`4` (*1000M), `normal`, and `1`) can be changed by `./bsub.vscode.tunnel.sh 10 yesterday 2`. This command will requests 10000M with 2 cores in `yesterday` queue.
 
+### GPU 
+The script requests gmem if queue name contains `gpu`, default is 6 (*1000M), it can be changed by fourth parameter `./bsub.vscode.tunnel.sh 2 gpu-normal 1 3`. This command will requests 2000M RAM, 3000M gmem, and 1 core in `gpu-normal` queue.
 ## Local machine
 First edit your `~/.ssh/config` by adding following lines:
 ```
