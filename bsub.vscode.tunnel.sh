@@ -1,8 +1,8 @@
 #! /bin/bash -e
 
 
-mem=${1:-40000}
-cpu=${2:-4}
+mem=${1:-4000}
+cpu=${2:-1}
 queue=${3:-normal}
 gmem=${4:-6000}
 name='vs-code-tunnel'
